@@ -1,145 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Orçamento Pessoal</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controle Financeiro</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Calculadora de Orçamento Pessoal</h1>
-        </div>
-    </header>
+  <div class="container">
+    <h1>Controle Financeiro</h1>
+    
+    <div class="balance">
+      <h2>Saldo: <span id="balance">R$ 0,00</span></h2>
+    </div>
 
-    <main class="container">
-        <div class="grid">
-            <div class="left-column">
-                <!-- Formulário para adicionar transações -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Nova Transação</h2>
-                    </div>
-                    <div class="card-content">
-                        <form id="transaction-form">
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="name">Nome da transação</label>
-                                    <input type="text" id="name" placeholder="Ex: Salário, Aluguel, etc." required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="amount">Valor (R$)</label>
-                                    <div class="input-with-prefix">
-                                        <span class="prefix">R$</span>
-                                        <input type="number" id="amount" step="0.01" min="0" placeholder="0,00" required>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="form">
+      <input type="text" id="description" placeholder="Descrição" />
+      <input type="number" id="amount" placeholder="Valor" />
+      
+      <div class="type-selection">
+        <button type="button" class="type-btn" id="income-btn" data-type="income">Receita</button>
+        <button type="button" class="type-btn" id="expense-btn" data-type="expense">Despesa</button>
+      </div>
 
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label>Tipo</label>
-                                    <div class="button-group">
-                                        <button type="button" id="income-btn" class="type-btn">Receita</button>
-                                        <button type="button" id="expense-btn" class="type-btn active">Despesa</button>
-                                        <input type="hidden" id="type" value="expense">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="category">Categoria</label>
-                                    <select id="category" required>
-                                        <option value="" disabled selected>Selecione uma categoria</option>
-                                        <option value="Alimentação">Alimentação</option>
-                                        <option value="Transporte">Transporte</option>
-                                        <option value="Moradia">Moradia</option>
-                                        <option value="Lazer">Lazer</option>
-                                        <option value="Saúde">Saúde</option>
-                                        <option value="Educação">Educação</option>
-                                        <option value="Trabalho">Trabalho</option>
-                                        <option value="Outros">Outros</option>
-                                    </select>
-                                </div>
-                            </div>
+      <button type="button" class="btn-add" id="add-btn">
+        <span>Adicionar Transação</span>
+      </button>
+    </div>
 
-                            <button type="submit" id="add-btn" class="btn-add">
-                                <i class="fas fa-plus-circle"></i>
-                                Adicionar Transação
-                            </button>
-                        </form>
-                    </div>
-                </div>
+    <table class="transactions">
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Valor</th>
+          <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody id="transactions-body">
+        <!-- Transações vão aparecer aqui -->
+      </tbody>
+    </table>
+  </div>
 
-                <!-- Lista de transações -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Transações</h2>
-                    </div>
-                    <div class="card-content">
-                        <div class="table-container">
-                            <table id="transactions-table">
-                                <thead>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th>Valor</th>
-                                        <th class="hide-mobile">Categoria</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="transactions-body">
-                                    <!-- Transações serão adicionadas aqui via JavaScript -->
-                                </tbody>
-                            </table>
-                            <p id="no-transactions" class="no-data">Nenhuma transação registrada.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="right-column">
-                <!-- Resumo financeiro -->
-                <div class="card summary-card">
-                    <div class="card-header">
-                        <h2>Resumo Financeiro</h2>
-                    </div>
-                    <div class="card-content">
-                        <div class="summary-item">
-                            <div class="summary-icon income-icon">
-                                <i class="fas fa-arrow-up"></i>
-                            </div>
-                            <div class="summary-info">
-                                <p class="summary-label">Receitas</p>
-                                <p id="total-income" class="summary-value income">R$ 0,00</p>
-                            </div>
-                        </div>
-
-                        <div class="summary-item">
-                            <div class="summary-icon expense-icon">
-                                <i class="fas fa-arrow-down"></i>
-                            </div>
-                            <div class="summary-info">
-                                <p class="summary-label">Despesas</p>
-                                <p id="total-expense" class="summary-value expense">R$ 0,00</p>
-                            </div>
-                        </div>
-
-                        <div class="summary-item balance-item">
-                            <div class="summary-icon balance-icon">
-                                <i class="fas fa-dollar-sign"></i>
-                            </div>
-                            <div class="summary-info">
-                                <p class="summary-label">Saldo</p>
-                                <p id="balance" class="summary-value balance">R$ 0,00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
