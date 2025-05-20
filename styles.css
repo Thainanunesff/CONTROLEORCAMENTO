@@ -1,0 +1,384 @@
+/* Variáveis CSS para facilitar a manutenção e consistência */
+:root {
+  /* Cores principais */
+  --bg-dark: #0a0a0f;
+  --bg-card: #111827;
+  --bg-card-hover: #1f2937;
+  --border-color: #1f2937;
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+
+  /* Cores de destaque */
+  --cyan: #22d3ee;
+  --purple: #a855f7;
+  --green: #4ade80;
+  --red: #f87171;
+
+  /* Gradientes */
+  --gradient-primary: linear-gradient(to right, #22d3ee, #a855f7);
+  --gradient-card: linear-gradient(to right, #111827, #1e293b);
+
+  /* Outros */
+  --radius: 0.5rem;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Reset e estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Container para limitar a largura do conteúdo */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+header .container {
+  padding: 1rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Layout principal */
+main {
+  padding: 2rem 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* Cards */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.card-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h2 {
+  font-size: 1.25rem;
+  color: var(--cyan);
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+/* Formulário */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--cyan);
+}
+
+.input-with-prefix {
+  position: relative;
+}
+
+.prefix {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.input-with-prefix input {
+  padding-left: 2.5rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Estilos dos botões de tipo */
+.type-btn {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #374151;
+  border-radius: var(--radius);
+  background-color: transparent;
+  color: var(--text-primary);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.type-btn.active {
+  border-color: transparent;
+}
+
+#income-btn.active {
+  background-color: #065f46;
+  color: var(--text-primary);
+}
+
+#expense-btn.active {
+  background-color: #9f1239;
+  color: var(--text-primary);
+}
+
+.btn-add {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: opacity 0.2s;
+}
+
+.btn-add:hover {
+  opacity: 0.9;
+}
+
+/* Tabela de transações */
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+tr:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.income-value {
+  color: var(--green);
+}
+
+.expense-value {
+  color: var(--red);
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: transparent;
+  border: 1px solid #374151;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+}
+
+.btn-remove {
+  background-color: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 9999px;
+  transition: all 0.2s;
+}
+
+.btn-remove:hover {
+  color: var(--red);
+  background-color: rgba(248, 113, 113, 0.1);
+}
+
+.no-data {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--text-secondary);
+}
+
+/* Resumo financeiro */
+.summary-card {
+  position: sticky;
+  top: 5rem;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+.balance-item {
+  background: var(--gradient-card);
+}
+
+.summary-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  margin-right: 0.75rem;
+}
+
+.income-icon {
+  background-color: rgba(74, 222, 128, 0.2);
+  color: var(--green);
+}
+
+.expense-icon {
+  background-color: rgba(248, 113, 113, 0.2);
+  color: var(--red);
+}
+
+.balance-icon {
+  background-color: rgba(34, 211, 238, 0.2);
+  color: var(--cyan);
+}
+
+.summary-info {
+  flex: 1;
+}
+
+.summary-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.summary-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.income {
+  color: var(--green);
+}
+
+.expense {
+  color: var(--red);
+}
+
+.balance {
+  color: var(--cyan);
+}
+
+.balance.negative {
+  color: var(--red);
+}
+
+/* Responsividade */
+@media (min-width: 768px) {
+  h1 {
+    font-size: 1.875rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .left-column {
+    grid-column: 1;
+  }
+
+  .right-column {
+    grid-column: 2;
+  }
+}
+
+/* Utilitários */
+.hide-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hide-mobile {
+    display: table-cell;
+  }
+}
